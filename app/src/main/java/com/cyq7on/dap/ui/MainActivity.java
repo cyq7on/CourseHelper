@@ -106,7 +106,7 @@ public class MainActivity extends BaseActivity implements ObseverListener {
     private void initTab() {
         User user = User.getCurrentUser(getApplicationContext(),User.class);
 
-        /*if (user.getRole() == 1) {
+        /*if (owner.getRole() == 1) {
             btn_contact.setText(R.string.role_stu);
             contactFragment = new ContactFragment();
         } else {

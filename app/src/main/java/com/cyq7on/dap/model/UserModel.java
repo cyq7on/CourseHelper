@@ -277,7 +277,7 @@ public class UserModel extends BaseModel {
     public void queryFriends(final FindListener<Friend> listener){
         BmobQuery<Friend> query = new BmobQuery<>();
         User user =BmobUser.getCurrentUser(getContext(), User.class);
-        query.addWhereEqualTo("user", user);
+        query.addWhereEqualTo("owner", user);
         query.include("friendUser");
         query.order("-updatedAt");
         query.findObjects(getContext(), new FindListener<Friend>() {
