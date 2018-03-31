@@ -1,15 +1,8 @@
-package com.zhuangfei.timetable.core;
+package com.cyq7on.dap.bean;
 
 import java.util.List;
 
-import cn.bmob.v3.BmobObject;
-
-/**
- * 课程实体
- * @author Administrator 刘壮飞
- *
- */
-public class SubjectBean extends BmobObject{
+public class MySubject {
 	/**
 	 * 课程名
 	 */
@@ -47,11 +40,16 @@ public class SubjectBean extends BmobObject{
 	 */
 	private int day;
 	
+	private String term;
+
 	/**
 	 *  一个随机数，用于对应课程的颜色
 	 */
 	private int colorRandom = 0;
 
+	public MySubject() {
+		// TODO Auto-generated constructor stub
+	}
 	
 	public void setTime(String time) {
 		this.time = time;
@@ -60,37 +58,28 @@ public class SubjectBean extends BmobObject{
 	public String getTime() {
 		return time;
 	}
-
-	public SubjectBean(String name, String room, String teacher,
-			List<Integer> weekList, int start, int step, int day,
-			int colorRandom,String time) {
+	
+	public void setTerm(String term) {
+		this.term = term;
+	}
+	
+	public String getTerm() {
+		return term;
+	}
+	
+	public MySubject(String term, String name, String room, String teacher, List<Integer> weekList, int start, int step, int day, int colorRandom, String time) {
 		super();
+		this.term=term;
 		this.name = name;
 		this.room = room;
 		this.teacher = teacher;
-		this.weekList = weekList;
+		this.weekList=weekList;
 		this.start = start;
 		this.step = step;
 		this.day = day;
 		this.colorRandom = colorRandom;
 		this.time=time;
 	}
-	
-	public SubjectBean(String name, String room, String teacher,
-			List<Integer> weekList, int start, int step, int day,
-			int colorRandom) {
-		super();
-		this.name = name;
-		this.room = room;
-		this.teacher = teacher;
-		this.weekList = weekList;
-		this.start = start;
-		this.step = step;
-		this.day = day;
-		this.colorRandom = colorRandom;
-	}
-
-
 
 	public String getName() {
 		return name;
@@ -155,9 +144,4 @@ public class SubjectBean extends BmobObject{
 	public void setColorRandom(int colorRandom) {
 		this.colorRandom = colorRandom;
 	}
-	public SubjectBean() {
-		super();
-	}
-	
-	
 }

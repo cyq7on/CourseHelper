@@ -7,12 +7,12 @@
 
     <include android:id="@+id/ll" layout="@layout/include_navi"/>
 
-    <android.support.v4.widget.SwipeRefreshLayout
+    <!--<android.support.v4.widget.SwipeRefreshLayout
         android:id="@+id/sw_refresh"
         android:layout_marginTop="@dimen/margin_10"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        >
+        >-->
 
         <com.zhuangfei.timetable.core.TimetableView
             android:id="@+id/timetableView"
@@ -21,6 +21,6 @@
 
         </com.zhuangfei.timetable.core.TimetableView>
 
-    </android.support.v4.widget.SwipeRefreshLayout>
+    <!--</android.support.v4.widget.SwipeRefreshLayout>-->
 
 </LinearLayout>

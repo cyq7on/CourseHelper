@@ -19,7 +19,7 @@
     <string name="login_pwd">密码 </string>
     <string name="login_email">确认密码 </string>
 
-    <string name="main_tab_recent">会话</string>
+    <string name="main_tab_recent">课程表</string>
     <string name="main_tab_contact">联系人</string>
     <string name="main_tab_doctor">医生</string>
     <string name="main_tab_patient">患者</string>

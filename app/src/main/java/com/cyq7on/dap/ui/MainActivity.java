@@ -14,9 +14,9 @@ import com.cyq7on.dap.bean.User;
 import com.cyq7on.dap.db.NewFriendManager;
 import com.cyq7on.dap.event.RefreshEvent;
 import com.cyq7on.dap.ui.fragment.ContactFragment;
-import com.cyq7on.dap.ui.fragment.ConversationFragment;
 import com.cyq7on.dap.ui.fragment.DepAndDoctorFragment;
 import com.cyq7on.dap.ui.fragment.SetFragment;
+import com.cyq7on.dap.ui.fragment.TimetableFragment;
 import com.cyq7on.dap.util.IMMLeaks;
 import com.orhanobut.logger.Logger;
 
@@ -57,7 +57,7 @@ public class MainActivity extends BaseActivity implements ObseverListener {
     ImageView iv_contact_tips;
 
     private Button[] mTabs;
-    private ConversationFragment conversationFragment;
+    private TimetableFragment timeTableFragment;
     private SetFragment setFragment;
     private ParentWithNaviFragment contactFragment;
     private Fragment[] fragments;
@@ -114,15 +114,15 @@ public class MainActivity extends BaseActivity implements ObseverListener {
             btn_contact.setText(R.string.role_teacher);
             contactFragment = new DepAndDoctorFragment();
         }
-        conversationFragment = new ConversationFragment();
+        timeTableFragment = new TimetableFragment();
         setFragment = new SetFragment();
-        fragments = new Fragment[]{conversationFragment, contactFragment, setFragment};
+        fragments = new Fragment[]{timeTableFragment, contactFragment, setFragment};
         getSupportFragmentManager().beginTransaction()
-                .add(R.id.fragment_container, conversationFragment).
+                .add(R.id.fragment_container, timeTableFragment).
                 add(R.id.fragment_container, contactFragment)
                 .add(R.id.fragment_container, setFragment)
                 .hide(setFragment).hide(contactFragment)
-                .show(conversationFragment).commit();
+                .show(timeTableFragment).commit();
     }
 
     public void onTabSelect(View view) {
