@@ -13,8 +13,7 @@ import com.cyq7on.dap.base.ParentWithNaviFragment;
 import com.cyq7on.dap.bean.User;
 import com.cyq7on.dap.db.NewFriendManager;
 import com.cyq7on.dap.event.RefreshEvent;
-import com.cyq7on.dap.ui.fragment.ContactFragment;
-import com.cyq7on.dap.ui.fragment.DepAndDoctorFragment;
+import com.cyq7on.dap.ui.fragment.TaskFragment;
 import com.cyq7on.dap.ui.fragment.SetFragment;
 import com.cyq7on.dap.ui.fragment.TimetableFragment;
 import com.cyq7on.dap.util.IMMLeaks;
@@ -106,14 +105,15 @@ public class MainActivity extends BaseActivity implements ObseverListener {
 
     private void initTab() {
         User user = User.getCurrentUser(getApplicationContext(),User.class);
-        //角色医生，显示病人列表
-        if (user.getRole() == 1) {
+
+        /*if (user.getRole() == 1) {
             btn_contact.setText(R.string.role_stu);
             contactFragment = new ContactFragment();
         } else {
             btn_contact.setText(R.string.role_teacher);
             contactFragment = new DepAndDoctorFragment();
-        }
+        }*/
+        contactFragment = new TaskFragment();
         timeTableFragment = new TimetableFragment();
         setFragment = new SetFragment();
         fragments = new Fragment[]{timeTableFragment, contactFragment, setFragment};

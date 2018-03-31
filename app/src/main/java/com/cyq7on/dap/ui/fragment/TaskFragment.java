@@ -16,14 +16,12 @@ import com.cyq7on.dap.adapter.base.IMutlipleItem;
 import com.cyq7on.dap.base.ParentWithNaviActivity;
 import com.cyq7on.dap.base.ParentWithNaviFragment;
 import com.cyq7on.dap.bean.User;
-import com.cyq7on.dap.event.RefreshEvent;
 import com.cyq7on.dap.model.BaseModel;
 import com.cyq7on.dap.model.UserModel;
 import com.cyq7on.dap.ui.SearchUserActivity;
 import com.cyq7on.dap.ui.UserInfoActivity;
 
 import org.greenrobot.eventbus.EventBus;
-import org.greenrobot.eventbus.Subscribe;
 
 import java.util.List;
 
@@ -36,7 +34,14 @@ import cn.bmob.v3.listener.FindListener;
  * @project:ContactFragment
  * @date :2016-04-27-14:23
  */
-public class ContactFragment extends ParentWithNaviFragment {
+
+/**
+ * @Description:
+ * @author: cyq7on
+ * @date: 18-3-31 下午4:24
+ * @version: V1.0
+ */
+public class TaskFragment extends ParentWithNaviFragment {
 
     @Bind(R.id.rc_view)
     RecyclerView rc_view;
@@ -47,13 +52,13 @@ public class ContactFragment extends ParentWithNaviFragment {
 
     @Override
     protected String title() {
-        return "患者";
+        return "任务";
     }
 
-    @Override
-    public Object right() {
-        return R.drawable.base_action_bar_add_bg_selector;
-    }
+//    @Override
+//    public Object right() {
+//        return R.drawable.base_action_bar_add_bg_selector;
+//    }
 
     @Override
     public ParentWithNaviActivity.ToolBarListener setToolBarListener() {
@@ -159,15 +164,6 @@ public class ContactFragment extends ParentWithNaviFragment {
         super.onStop();
     }
 
-    /**注册自定义消息接收事件
-     * @param event
-     */
-    @Subscribe
-    public void onEventMainThread(RefreshEvent event){
-        //重新刷新列表
-        log("---联系人界面接收到自定义消息---");
-        adapter.notifyDataSetChanged();
-    }
 
     /**
       查询本地会话
