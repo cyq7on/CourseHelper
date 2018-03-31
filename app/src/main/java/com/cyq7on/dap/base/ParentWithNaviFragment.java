@@ -18,7 +18,7 @@ public abstract class ParentWithNaviFragment extends BaseFragment {
 
     protected View rootView = null;
     private ParentWithNaviActivity.ToolBarListener listener;
-    private TextView tv_title;
+    public TextView tv_title;
     public TextView tv_right;
     public ImageView tv_left;
     public LinearLayout ll_navi;
