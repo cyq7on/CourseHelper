@@ -103,8 +103,16 @@ public class TaskFragment extends ParentWithNaviFragment {
         rootView = inflater.inflate(R.layout.fragment_task, container, false);
         initNaviView();
         ButterKnife.bind(this, rootView);
-        fragments[0] = new StudentTaskFragment();
-        fragments[1] = new TeacherTaskFragment();
+        User user = User.getCurrentUser(getActivity(),User.class);
+        //学生
+        if(user.getRole() == 0){
+            fragments[0] = new StudentTaskFragment();
+            fragments[1] = new TeacherTaskFragment();
+        }else {
+            fragments[1] = new StudentTaskFragment();
+            fragments[0] = new TeacherTaskFragment();
+        }
+
         vp.setAdapter(new FragmentPagerAdapter(getChildFragmentManager()) {
             @Override
             public int getCount() {

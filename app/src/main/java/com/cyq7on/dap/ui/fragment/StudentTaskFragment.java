@@ -127,14 +127,15 @@ public class StudentTaskFragment extends ParentWithNaviFragment {
         query.findObjects(getActivity(), new FindListener<StudentTaskInfo>() {
             @Override
             public void onSuccess(List<StudentTaskInfo> infoList) {
-                if(infoList.size() == 0){
+                swRefresh.setRefreshing(false);
+                if(getUserVisibleHint() && infoList.size() == 0){
                     toast("暂无提交信息");
+                    return;
                 }
                 for (int i = 0; i < infoList.size(); i++) {
                     Logger.d(infoList.get(i).title);
                 }
                 adapter.bindDatas(infoList);
-                swRefresh.setRefreshing(false);
             }
 
             @Override
