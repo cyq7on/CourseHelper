@@ -16,6 +16,7 @@ import com.cyq7on.dap.adapter.StudentTaskAdapter;
 import com.cyq7on.dap.adapter.base.IMutlipleItem;
 import com.cyq7on.dap.base.ParentWithNaviFragment;
 import com.cyq7on.dap.bean.StudentTaskInfo;
+import com.cyq7on.dap.bean.User;
 import com.orhanobut.logger.Logger;
 
 import java.util.List;
@@ -112,18 +113,27 @@ public class StudentTaskFragment extends ParentWithNaviFragment {
     }
 
     private void query() {
+        User user = User.getCurrentUser(getActivity(), User.class);
         BmobQuery<StudentTaskInfo> query = new BmobQuery<>();
-//        query.addWhereContains("username", username);
         query.setLimit(100);
         query.order("-createdAt");
+        query.include("teacher");
+        BmobQuery<User> innerQuery = new BmobQuery<>();
+        innerQuery.addWhereEqualTo("objectId",user.getObjectId());
+        // 第一个参数为stu字段名
+        // 第二个参数为User字段的表名，也可以直接用字符串的形式
+        // 第三个参数为内部查询条件
+        query.addWhereMatchesQuery("stu", "_User", innerQuery);
         query.findObjects(getActivity(), new FindListener<StudentTaskInfo>() {
             @Override
             public void onSuccess(List<StudentTaskInfo> infoList) {
+                if(infoList.size() == 0){
+                    toast("暂无提交信息");
+                }
                 for (int i = 0; i < infoList.size(); i++) {
                     Logger.d(infoList.get(i).title);
                 }
                 adapter.bindDatas(infoList);
-                adapter.notifyDataSetChanged();
                 swRefresh.setRefreshing(false);
             }
 

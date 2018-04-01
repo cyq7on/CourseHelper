@@ -116,6 +116,7 @@ public class TeacherTaskFragment extends ParentWithNaviFragment {
 //        query.addWhereContains("username", username);
         query.setLimit(100);
         query.order("-createdAt");
+//        query.include("");
         query.findObjects(getActivity(), new FindListener<StudentTaskInfo>() {
             @Override
             public void onSuccess(List<StudentTaskInfo> infoList) {
@@ -123,7 +124,6 @@ public class TeacherTaskFragment extends ParentWithNaviFragment {
                     Logger.d(infoList.get(i).title);
                 }
                 adapter.bindDatas(infoList);
-                adapter.notifyDataSetChanged();
                 swRefresh.setRefreshing(false);
             }
 

@@ -30,6 +30,7 @@ public class StudentTaskAdapter extends BaseRecyclerAdapter<StudentTaskInfo> {
     public void bindView(BaseRecyclerHolder holder, StudentTaskInfo studentTaskInfo, int position) {
         User user = studentTaskInfo.stu;
         holder.setImageView(user.getAvatar(), com.cyq7on.dap.R.mipmap.head, com.cyq7on.dap.R.id.iv_recent_avatar);
-        holder.setText(com.cyq7on.dap.R.id.tv_recent_name,studentTaskInfo.title + user.getUsername());
+        String msg = String.format("发送给%s：%s",studentTaskInfo.teacher.getUsername(),studentTaskInfo.title);
+        holder.setText(com.cyq7on.dap.R.id.tv_recent_name,msg);
     }
 }

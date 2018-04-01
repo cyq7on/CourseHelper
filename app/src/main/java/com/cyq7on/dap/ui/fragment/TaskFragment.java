@@ -34,7 +34,7 @@ public class TaskFragment extends ParentWithNaviFragment {
 
     @Override
     protected String title() {
-        return "任务";
+        return "已提交任务";
     }
 
     @Override
