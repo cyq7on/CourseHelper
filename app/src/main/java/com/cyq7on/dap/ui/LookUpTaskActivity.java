@@ -11,15 +11,21 @@ import com.cyq7on.dap.R;
 import com.cyq7on.dap.base.ParentWithNaviActivity;
 import com.cyq7on.dap.bean.StudentTaskInfo;
 import com.cyq7on.dap.bean.TeacherTaskInfo;
+import com.cyq7on.dap.bean.User;
 import com.cyq7on.dap.event.UserEvent;
+import com.cyq7on.dap.model.UserModel;
 import com.cyq7on.dap.ui.fragment.ReceiverFragment;
 import com.orhanobut.logger.Logger;
 
 import org.greenrobot.eventbus.Subscribe;
 
+import java.util.List;
+
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import cn.bmob.v3.datatype.BmobRelation;
+import cn.bmob.v3.listener.FindListener;
 import cn.bmob.v3.listener.SaveListener;
 import cn.bmob.v3.listener.UpdateListener;
 
@@ -71,8 +77,9 @@ public class LookUpTaskActivity extends ParentWithNaviActivity {
         //新建任务
         if (bundle == null) {
             btnEdit.setVisibility(View.GONE);
+            rlScore.setVisibility(View.GONE);
             if (user.getRole() == 0) {
-                rlScore.setVisibility(View.GONE);
+
             } else {
                 rlTarget.setVisibility(View.GONE);
             }
@@ -152,6 +159,7 @@ public class LookUpTaskActivity extends ParentWithNaviActivity {
                     Logger.d(i + s);
                 }
             });
+
         } else {
             if(teacherTaskInfo == null){
                 teacherTaskInfo = new TeacherTaskInfo();
@@ -159,15 +167,31 @@ public class LookUpTaskActivity extends ParentWithNaviActivity {
             teacherTaskInfo.title = tvTitle.getText().toString();
             teacherTaskInfo.content = tvContent.getText().toString();
             teacherTaskInfo.teacher = user;
-            teacherTaskInfo.save(getApplicationContext(), new SaveListener() {
+            UserModel.getInstance().queryUsers("role", 0, 100, new FindListener<User>() {
                 @Override
-                public void onSuccess() {
-                    toast("发布成功");
-                    finish();
+                public void onSuccess(List<User> list) {
+                    BmobRelation relation = new BmobRelation();
+                    for (User user : list) {
+                        relation.add(user);
+                    }
+                    teacherTaskInfo.stu = relation;
+                    teacherTaskInfo.save(getApplicationContext(), new SaveListener() {
+                        @Override
+                        public void onSuccess() {
+                            toast("发布成功");
+                            finish();
+                        }
+
+                        @Override
+                        public void onFailure(int i, String s) {
+                            toast("发布失败");
+                            Logger.d(i + s);
+                        }
+                    });
                 }
 
                 @Override
-                public void onFailure(int i, String s) {
+                public void onError(int i, String s) {
                     toast("发布失败");
                     Logger.d(i + s);
                 }
