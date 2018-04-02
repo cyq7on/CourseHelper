@@ -11,13 +11,10 @@ import android.view.ViewGroup;
 import com.cyq7on.dap.R;
 import com.cyq7on.dap.base.ParentWithNaviActivity;
 import com.cyq7on.dap.base.ParentWithNaviFragment;
-import com.cyq7on.dap.bean.StudentTaskInfo;
 import com.cyq7on.dap.bean.User;
-import com.orhanobut.logger.Logger;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import cn.bmob.v3.listener.SaveListener;
 
 /**
  * @Description:
@@ -75,7 +72,7 @@ public class TaskFragment extends ParentWithNaviFragment {
                     public void onFailure(int i, String s) {
                         Logger.d(i + s);
                     }
-                });*/
+                });
 
                 StudentTaskInfo studentTaskInfo = new StudentTaskInfo();
                 studentTaskInfo.title = "StuTest";
@@ -93,7 +90,7 @@ public class TaskFragment extends ParentWithNaviFragment {
                     public void onFailure(int i, String s) {
                         Logger.d(i + s);
                     }
-                });
+                });*/
             }
         };
     }
@@ -103,15 +100,15 @@ public class TaskFragment extends ParentWithNaviFragment {
         rootView = inflater.inflate(R.layout.fragment_task, container, false);
         initNaviView();
         ButterKnife.bind(this, rootView);
-        User user = User.getCurrentUser(getActivity(),User.class);
-        //学生
+        User user = User.getCurrentUser(getActivity(), User.class);
         if(user.getRole() == 0){
-            fragments[0] = new StudentTaskFragment();
-            fragments[1] = new TeacherTaskFragment();
+            fragments[0] = new StuSendTaskFragment();
+            fragments[1] = new StuReceiveTaskFragment();
         }else {
-            fragments[1] = new StudentTaskFragment();
-            fragments[0] = new TeacherTaskFragment();
+            fragments[0] = new TeacherSendTaskFragment();
+            fragments[1] = new TeacherReceiveTaskFragment();
         }
+
 
         vp.setAdapter(new FragmentPagerAdapter(getChildFragmentManager()) {
             @Override
