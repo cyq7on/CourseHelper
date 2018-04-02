@@ -25,9 +25,13 @@
         <EditText
             android:id="@+id/tvTitle"
             style="@style/style_text_black"
+            android:gravity="end"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
             android:background="@null"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
+            android:layout_marginLeft="40dp"
             android:layout_marginRight="20dp"
             android:paddingRight="10dp"
             android:drawablePadding="10dp" />
@@ -48,9 +52,10 @@
         <EditText
             android:background="@null"
             android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:id="@+id/tvContent"
             style="@style/style_text_black"
+            android:gravity="end"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="20dp"
@@ -59,6 +64,7 @@
             android:drawablePadding="10dp" />
     </RelativeLayout>
     <RelativeLayout
+        android:id="@+id/rlScore"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/about_mid_bg"
@@ -73,9 +79,13 @@
         <EditText
             android:id="@+id/tvScore"
             android:background="@null"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
             style="@style/style_text_black"
+            android:gravity="end"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
+            android:layout_marginLeft="40dp"
             android:layout_marginRight="20dp"
             android:paddingRight="10dp"
             android:drawablePadding="10dp" />
