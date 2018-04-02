@@ -34,6 +34,7 @@
     <string name="task_score">分数</string>
     <string name="task_publish">提交任务</string>
     <string name="task_update">更改任务</string>
+    <string name="task_target">接收人</string>
 
     <string name="chat">聊天</string>
     <string name="add_friend">添加好友</string>
