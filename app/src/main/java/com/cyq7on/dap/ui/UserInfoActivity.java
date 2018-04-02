@@ -43,10 +43,7 @@ public class UserInfoActivity extends ParentWithNaviActivity {
     TextView tv_sex;
     @Bind(R.id.tv_age)
     EditText tv_age;
-    @Bind(R.id.tv_other)
-    EditText tv_other;
-    @Bind(R.id.tv_other_title)
-    TextView tv_other_title;
+
 
 //    @Bind(com.cyq7on.dap.R.id.btn_add_friend)
 //    Button btn_add_friend;

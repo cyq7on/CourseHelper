@@ -118,6 +118,7 @@ public class TeacherReceiveTaskFragment extends ParentWithNaviFragment {
         query.setLimit(100);
         query.order("-createdAt");
         query.include("teacher");
+        query.include("stu");
         BmobQuery<User> innerQuery = new BmobQuery<>();
         innerQuery.addWhereEqualTo("objectId",user.getObjectId());
         // 第一个参数为stu字段名

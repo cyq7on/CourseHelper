@@ -117,6 +117,7 @@ public class StuReceiveTaskFragment extends ParentWithNaviFragment {
         BmobQuery<TeacherTaskInfo> query = new BmobQuery<>();
         query.setLimit(100);
         query.order("-createdAt");
+        query.include("teacher");
         BmobQuery<User> innerQuery = new BmobQuery<>();
         innerQuery.addWhereEqualTo("objectId",user.getObjectId());
         // 第一个参数为stu字段名

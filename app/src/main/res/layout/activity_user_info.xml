@@ -113,32 +113,7 @@
             android:paddingRight="10dp"
             android:drawablePadding="10dp" />
     </RelativeLayout>
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/about_mid_bg"
-        android:padding="10dp" >
 
-        <TextView
-            android:id="@+id/tv_other_title"
-            style="@style/style_text_black"
-            android:layout_alignParentLeft="true"
-            android:layout_centerVertical="true" />
-
-        <EditText
-            android:layout_marginLeft="30dp"
-            android:id="@+id/tv_other"
-            android:gravity="end"
-            android:background="@null"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            style="@style/style_text_black"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="20dp"
-            android:paddingRight="10dp"
-            android:drawablePadding="10dp" />
-    </RelativeLayout>
 
     <!--<Button
         android:id="@+id/btn_add_friend"

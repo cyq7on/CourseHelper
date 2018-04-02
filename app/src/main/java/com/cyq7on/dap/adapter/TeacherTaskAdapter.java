@@ -15,6 +15,7 @@ import java.util.Collection;
  */
 
 public class TeacherTaskAdapter extends BaseRecyclerAdapter<TeacherTaskInfo> {
+    private User user;
     /**
      * 支持一种或多种Item布局
      *
@@ -24,13 +25,19 @@ public class TeacherTaskAdapter extends BaseRecyclerAdapter<TeacherTaskInfo> {
      */
     public TeacherTaskAdapter(Context context, IMutlipleItem<TeacherTaskInfo> items, Collection<TeacherTaskInfo> datas) {
         super(context, items, datas);
+        user = User.getCurrentUser(context,User.class);
     }
 
     @Override
     public void bindView(BaseRecyclerHolder holder, TeacherTaskInfo teacherTaskInfo, int position) {
         User user = teacherTaskInfo.teacher;
         holder.setImageView(user.getAvatar(), com.cyq7on.dap.R.mipmap.head, com.cyq7on.dap.R.id.iv_recent_avatar);
-        String msg = String.format("已发送%s",teacherTaskInfo.title);
+        String msg;
+        if(this.user.getRole() == 0){
+            msg = String.format("来自%s：%s",teacherTaskInfo.teacher.getUsername(),teacherTaskInfo.title);
+        }else {
+            msg = String.format("已发送%s",teacherTaskInfo.title);
+        }
         holder.setText(com.cyq7on.dap.R.id.tv_recent_name,msg);
     }
 }
