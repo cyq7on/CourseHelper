@@ -28,6 +28,7 @@ import cn.bmob.v3.listener.FindListener;
 
 /**
  * Created by cyq7on on 18-3-31.
+ * TeacherTaskInfo表里查询学生收到的任务
  */
 
 public class StuReceiveTaskFragment extends ParentWithNaviFragment {

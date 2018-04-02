@@ -10,4 +10,5 @@ public class StudentTaskInfo extends BmobObject {
     public String title;
     public User stu;
     public User teacher;
+    public String score;
 }
