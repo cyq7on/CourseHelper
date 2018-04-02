@@ -9,6 +9,7 @@ import cn.bmob.v3.datatype.BmobRelation;
 
 public class TeacherTaskInfo extends BmobObject {
     public String title;
+    public String content;
     public BmobRelation stu;
     public User teacher;
 }

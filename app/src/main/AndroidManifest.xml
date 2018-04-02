@@ -77,6 +77,7 @@
         <!-- bmobim end -->
 
         <activity android:name=".ui.EditPwdActivity"></activity>
+        <activity android:name=".ui.LookUpTaskActivity"></activity>
     </application>
 
 </manifest>

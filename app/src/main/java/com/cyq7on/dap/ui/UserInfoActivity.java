@@ -47,7 +47,7 @@ public class UserInfoActivity extends ParentWithNaviActivity {
 
 //    @Bind(com.cyq7on.dap.R.id.btn_add_friend)
 //    Button btn_add_friend;
-    @Bind(com.cyq7on.dap.R.id.btn_chat)
+    @Bind(com.cyq7on.dap.R.id.btn_publish)
     Button btn_chat;
 
     @Bind(R.id.btn_edit)
@@ -117,7 +117,7 @@ public class UserInfoActivity extends ParentWithNaviActivity {
         });
     }
 
-    @OnClick(com.cyq7on.dap.R.id.btn_chat)
+    @OnClick(com.cyq7on.dap.R.id.btn_publish)
     public void onChatClick(View view){
         //启动一个会话，设置isTransient设置为false,则会在本地数据库的会话列表中先创建（如果没有）与该用户的会话信息，且将用户信息存储到本地的用户表中
         BmobIMConversation c = BmobIM.getInstance().startPrivateConversation(info,false,null);

@@ -8,6 +8,7 @@ import cn.bmob.v3.BmobObject;
 
 public class StudentTaskInfo extends BmobObject {
     public String title;
+    public String content;
     public User stu;
     public User teacher;
     public String score;

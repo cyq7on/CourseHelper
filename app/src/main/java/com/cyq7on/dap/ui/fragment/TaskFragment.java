@@ -1,5 +1,6 @@
 package com.cyq7on.dap.ui.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -12,6 +13,7 @@ import com.cyq7on.dap.R;
 import com.cyq7on.dap.base.ParentWithNaviActivity;
 import com.cyq7on.dap.base.ParentWithNaviFragment;
 import com.cyq7on.dap.bean.User;
+import com.cyq7on.dap.ui.LookUpTaskActivity;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -49,48 +51,7 @@ public class TaskFragment extends ParentWithNaviFragment {
 
             @Override
             public void clickRight() {
-                /*TeacherTaskInfo teacherTaskInfo = new TeacherTaskInfo();
-                User user = User.getCurrentUser(getActivity(),User.class);
-                teacherTaskInfo.title = "TeacherTest";
-                teacherTaskInfo.teacher = user;
-                BmobRelation relation = new BmobRelation();
-                //将用户添加到多对多关联中
-                User stu1 = new User();
-                stu1.setObjectId("5eosSSSe");
-                relation.add(stu1);
-                User stu2 = new User();
-                stu2.setObjectId("e8063bd737");
-                relation.add(stu2);
-                teacherTaskInfo.stu = relation;
-                teacherTaskInfo.save(getActivity(), new SaveListener() {
-                    @Override
-                    public void onSuccess() {
-                        toast("提交成功");
-                    }
-
-                    @Override
-                    public void onFailure(int i, String s) {
-                        Logger.d(i + s);
-                    }
-                });
-
-                StudentTaskInfo studentTaskInfo = new StudentTaskInfo();
-                studentTaskInfo.title = "StuTest";
-                studentTaskInfo.stu = User.getCurrentUser(getActivity(), User.class);
-                User teacher = new User();
-                teacher.setObjectId("Ii6CBBBW");
-                studentTaskInfo.teacher = teacher;
-                studentTaskInfo.save(getActivity(), new SaveListener() {
-                    @Override
-                    public void onSuccess() {
-                        toast("提交成功");
-                    }
-
-                    @Override
-                    public void onFailure(int i, String s) {
-                        Logger.d(i + s);
-                    }
-                });*/
+                startActivity(new Intent(getActivity(), LookUpTaskActivity.class));
             }
         };
     }

@@ -17,6 +17,7 @@ import com.cyq7on.dap.adapter.base.IMutlipleItem;
 import com.cyq7on.dap.base.ParentWithNaviFragment;
 import com.cyq7on.dap.bean.TeacherTaskInfo;
 import com.cyq7on.dap.bean.User;
+import com.cyq7on.dap.ui.LookUpTaskActivity;
 import com.orhanobut.logger.Logger;
 
 import java.util.List;
@@ -92,18 +93,10 @@ public class TeacherSendTaskFragment extends ParentWithNaviFragment {
         adapter.setOnRecyclerViewListener(new OnRecyclerViewListener() {
             @Override
             public void onItemClick(int position) {
-                /*User owner = adapter.getItem(position);
-                BmobIMUserInfo info = new BmobIMUserInfo(owner.getObjectId(), owner.getUsername(), owner.getAvatar());
-                //启动一个会话，实际上就是在本地数据库的会话列表中先创建（如果没有）与该用户的会话信息，且将用户信息存储到本地的用户表中
-                BmobIMConversation c = BmobIM.getInstance().startPrivateConversation(info, null);
                 Bundle bundle = new Bundle();
-                bundle.putSerializable("c", c);
-                startActivity(ChatActivity.class, bundle);
-
-                Bundle bundle = new Bundle();
-                User user = adapter.getItem(position);
-                bundle.putSerializable("u", user);
-                startActivity(UserInfoActivity.class, bundle);*/
+                TeacherTaskInfo teacherTaskInfo = adapter.getItem(position);
+                bundle.putSerializable("info", teacherTaskInfo);
+                startActivity(LookUpTaskActivity.class, bundle);
             }
 
             @Override

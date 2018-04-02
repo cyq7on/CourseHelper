@@ -29,6 +29,12 @@
     <string name="agree">接受</string>
     <string name="new_friend">新的朋友</string>
 
+    <string name="task_topic">主题</string>
+    <string name="task_content">内容</string>
+    <string name="task_score">分数</string>
+    <string name="task_publish">提交任务</string>
+    <string name="task_update">更改任务</string>
+
     <string name="chat">聊天</string>
     <string name="add_friend">添加好友</string>
     <string name="edit">修改资料</string>
