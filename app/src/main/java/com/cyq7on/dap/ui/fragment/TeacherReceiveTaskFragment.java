@@ -112,6 +112,7 @@ public class TeacherReceiveTaskFragment extends ParentWithNaviFragment {
         BmobQuery<StudentTaskInfo> query = new BmobQuery<>();
         query.setLimit(100);
         query.order("-createdAt");
+        query.addWhereLessThan("score","60");
         query.include("teacher");
         query.include("stu");
         BmobQuery<User> innerQuery = new BmobQuery<>();
