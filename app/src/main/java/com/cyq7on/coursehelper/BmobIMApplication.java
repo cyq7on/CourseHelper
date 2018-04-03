@@ -10,7 +10,6 @@ import java.io.File;
 import java.io.FileReader;
 
 import cn.bmob.newim.BmobIM;
-import cn.bmob.push.BmobPush;
 
 /**
  * @author :smile
@@ -42,6 +41,7 @@ public class BmobIMApplication extends Application{
             BmobIM.init(this);
             //注册消息接收器
             BmobIM.registerDefaultMessageHandler(new DemoMessageHandler(this));
+            //推送有坑，利用im消息代替
             /*BmobInstallationManager.getInstance().initialize(new InstallationListener<BmobInstallation>() {
                 @Override
                 public void done(BmobInstallation bmobInstallation, BmobException e) {
@@ -53,7 +53,7 @@ public class BmobIMApplication extends Application{
                 }
             });*/
             // 启动推送服务
-            BmobPush.startWork(this);
+//            BmobPush.startWork(this);
         }
         //uil初始化
         UniversalImageLoader.initImageLoader(this);

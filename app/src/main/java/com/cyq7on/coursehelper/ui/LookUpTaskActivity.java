@@ -10,12 +10,14 @@ import android.widget.TextView;
 
 import com.cyq7on.coursehelper.R;
 import com.cyq7on.coursehelper.base.ParentWithNaviActivity;
+import com.cyq7on.coursehelper.bean.PushMessage;
 import com.cyq7on.coursehelper.bean.StudentTaskInfo;
 import com.cyq7on.coursehelper.bean.TeacherTaskInfo;
 import com.cyq7on.coursehelper.bean.User;
 import com.cyq7on.coursehelper.event.UserEvent;
 import com.cyq7on.coursehelper.model.UserModel;
 import com.cyq7on.coursehelper.ui.fragment.ReceiverFragment;
+import com.google.gson.Gson;
 import com.orhanobut.logger.Logger;
 
 import org.greenrobot.eventbus.Subscribe;
@@ -25,7 +27,14 @@ import java.util.List;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import cn.bmob.newim.BmobIM;
+import cn.bmob.newim.bean.BmobIMConversation;
+import cn.bmob.newim.bean.BmobIMMessage;
+import cn.bmob.newim.bean.BmobIMUserInfo;
+import cn.bmob.newim.core.BmobIMClient;
+import cn.bmob.newim.listener.MessageSendListener;
 import cn.bmob.v3.datatype.BmobRelation;
+import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.FindListener;
 import cn.bmob.v3.listener.SaveListener;
 import cn.bmob.v3.listener.UpdateListener;
@@ -128,7 +137,7 @@ public class LookUpTaskActivity extends ParentWithNaviActivity {
     @Subscribe
     public void onEventMainThread(UserEvent userEvent) {
         Logger.d(userEvent.user.toString());
-        if(studentTaskInfo == null){
+        if (studentTaskInfo == null) {
             studentTaskInfo = new StudentTaskInfo();
         }
         studentTaskInfo.teacher = userEvent.user;
@@ -138,7 +147,7 @@ public class LookUpTaskActivity extends ParentWithNaviActivity {
     @OnClick(R.id.btn_publish)
     public void onPublishClick(View view) {
         if (user.getRole() == 0) {
-            if(studentTaskInfo == null){
+            if (studentTaskInfo == null) {
                 studentTaskInfo = new StudentTaskInfo();
             }
             studentTaskInfo.title = tvTitle.getText().toString();
@@ -160,7 +169,7 @@ public class LookUpTaskActivity extends ParentWithNaviActivity {
             });
 
         } else {
-            if(teacherTaskInfo == null){
+            if (teacherTaskInfo == null) {
                 teacherTaskInfo = new TeacherTaskInfo();
             }
             teacherTaskInfo.title = tvTitle.getText().toString();
@@ -168,7 +177,7 @@ public class LookUpTaskActivity extends ParentWithNaviActivity {
             teacherTaskInfo.teacher = user;
             UserModel.getInstance().queryUsers("role", 0, 100, new FindListener<User>() {
                 @Override
-                public void onSuccess(List<User> list) {
+                public void onSuccess(final List<User> list) {
                     BmobRelation relation = new BmobRelation();
                     for (User user : list) {
                         relation.add(user);
@@ -178,6 +187,10 @@ public class LookUpTaskActivity extends ParentWithNaviActivity {
                         @Override
                         public void onSuccess() {
                             toast("发布成功");
+                            String json = new Gson().toJson(teacherTaskInfo);
+                            for (User user : list) {
+                                sendMsg(json, user);
+                            }
                             finish();
                         }
 
@@ -196,6 +209,31 @@ public class LookUpTaskActivity extends ParentWithNaviActivity {
                 }
             });
         }
+    }
+
+    private void sendMsg(String content, User user) {
+        BmobIMUserInfo info = new BmobIMUserInfo(user.getObjectId(), user.getUsername(), user.getAvatar());
+        //启动一个会话，如果isTransient设置为true,则不会创建在本地会话表中创建记录，
+        //设置isTransient设置为false,则会在本地数据库的会话列表中先创建（如果没有）与该用户的会话信息，且将用户信息存储到本地的用户表中
+        BmobIMConversation c = BmobIM.getInstance().startPrivateConversation(info, true, null);
+        //这个obtain方法才是真正创建一个管理消息发送的会话
+        BmobIMConversation conversation = BmobIMConversation.obtain(BmobIMClient.getInstance(), c);
+        PushMessage msg = new PushMessage();
+        msg.setContent(content);
+       /* //可设置额外信息
+        Map<String,Object> map =new HashMap<>();
+        map.put("level", "1");//随意增加信息
+        msg.setExtraMap(map);*/
+        conversation.sendMessage(msg, new MessageSendListener() {
+            @Override
+            public void done(BmobIMMessage bmobIMMessage, BmobException e) {
+                if (e == null) {
+                    Logger.d("send success:" + bmobIMMessage.getContent());
+                    return;
+                }
+                Logger.d(e.getMessage() + e.getErrorCode());
+            }
+        });
     }
 
     @OnClick(R.id.btn_edit)
@@ -238,7 +276,8 @@ public class LookUpTaskActivity extends ParentWithNaviActivity {
 
     @OnClick(R.id.rlTarget)
     public void onSelectClick(View view) {
-        new ReceiverFragment().show(getFragmentManager(), ReceiverFragment.class.getSimpleName());;
+        new ReceiverFragment().show(getFragmentManager(), ReceiverFragment.class.getSimpleName());
+        ;
     }
 
 }

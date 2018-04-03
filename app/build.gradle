@@ -57,4 +57,5 @@ dependencies {
     compile 'com.orhanobut:logger:1.4'
     compile 'org.greenrobot:eventbus:3.0.0'
     compile project(':TimetableView')
+    compile 'com.google.code.gson:gson:2.8.2'
 }
