@@ -131,6 +131,7 @@ public class DemoMessageHandler extends BmobIMMessageHandler{
             Logger.d(teacherTaskInfo.title + teacherTaskInfo.content + teacherTaskInfo.teacher.getUsername());
             if (BmobNotificationManager.getInstance(context).isShowNotification()) {//如果需要显示通知栏，SDK提供以下两种显示方式：
                 Intent pendingIntent = new Intent(context, MainActivity.class);
+                pendingIntent.putExtra("page",1);
                 pendingIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                 //1、多个用户的多条消息合并成一条通知：有XX个联系人发来了XX条消息
 //                BmobNotificationManager.getInstance(context).showNotification(event, pendingIntent);
@@ -139,10 +140,10 @@ public class DemoMessageHandler extends BmobIMMessageHandler{
 //                        //这里可以是应用图标，也可以将聊天头像转成bitmap
                         Bitmap largetIcon = BitmapFactory.decodeResource(context.getResources(), R.mipmap.ic_launcher);
                         BmobNotificationManager.getInstance(context).showNotification(largetIcon,
-                                teacherTaskInfo.teacher.getUsername() + "发来任务",teacherTaskInfo.content,teacherTaskInfo.title,pendingIntent);
+                                teacherTaskInfo.teacher.getUsername() + "发来任务：" + teacherTaskInfo.title,teacherTaskInfo.content,teacherTaskInfo.title,pendingIntent);
             } else {//直接发送消息事件
                 Logger.i("当前处于应用内，发送event");
-                EventBus.getDefault().post(event);
+                EventBus.getDefault().post(teacherTaskInfo);
             }
         } else{
             Toast.makeText(context,"接收到的自定义消息："+msg.getMsgType() + "," + msg.getContent() + "," + msg.getExtra(),Toast.LENGTH_SHORT).show();

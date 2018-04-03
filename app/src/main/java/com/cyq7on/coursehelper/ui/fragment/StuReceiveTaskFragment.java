@@ -20,6 +20,9 @@ import com.cyq7on.coursehelper.bean.User;
 import com.cyq7on.coursehelper.ui.LookUpTaskActivity;
 import com.orhanobut.logger.Logger;
 
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+
 import java.util.List;
 
 import butterknife.Bind;
@@ -44,6 +47,22 @@ public class StuReceiveTaskFragment extends ParentWithNaviFragment {
         return "";
     }
 
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        EventBus.getDefault().register(this);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
+    }
+    @Subscribe
+    public void onEventMainThread(TeacherTaskInfo teacherTaskInfo) {
+        Logger.d("收到teacherTaskInfo");
+        query();
+    }
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {

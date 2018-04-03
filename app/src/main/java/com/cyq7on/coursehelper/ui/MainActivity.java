@@ -66,6 +66,7 @@ public class MainActivity extends BaseActivity implements ObseverListener {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        index = getIntent().getIntExtra("page", 0);
         setContentView(R.layout.activity_main);
         //connect server
         User user = BmobUser.getCurrentUser(this, User.class);
@@ -117,12 +118,22 @@ public class MainActivity extends BaseActivity implements ObseverListener {
         timeTableFragment = new TimetableFragment();
         setFragment = new SetFragment();
         fragments = new Fragment[]{timeTableFragment, contactFragment, setFragment};
-        getSupportFragmentManager().beginTransaction()
-                .add(R.id.fragment_container, timeTableFragment).
-                add(R.id.fragment_container, contactFragment)
-                .add(R.id.fragment_container, setFragment)
-                .hide(setFragment).hide(contactFragment)
-                .show(timeTableFragment).commit();
+        if(index == 0){
+            getSupportFragmentManager().beginTransaction()
+                    .add(R.id.fragment_container, timeTableFragment).
+                    add(R.id.fragment_container, contactFragment)
+                    .add(R.id.fragment_container, setFragment)
+                    .hide(setFragment).hide(contactFragment)
+                    .show(timeTableFragment).commit();
+        }else {
+            getSupportFragmentManager().beginTransaction()
+                    .add(R.id.fragment_container, timeTableFragment).
+                    add(R.id.fragment_container, contactFragment)
+                    .add(R.id.fragment_container, setFragment)
+                    .hide(setFragment).hide(timeTableFragment)
+                    .show(contactFragment).commit();
+        }
+
     }
 
     public void onTabSelect(View view) {
