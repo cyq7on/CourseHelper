@@ -1,7 +1,7 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 22
+    compileSdkVersion 26
     buildToolsVersion "26.0.3"
 
     aaptOptions.cruncherEnabled = false
@@ -57,4 +57,6 @@ dependencies {
     compile 'com.orhanobut:logger:1.4'
     compile 'org.greenrobot:eventbus:3.0.0'
     compile project(':TimetableView')
+    //Bmob的消息推送SDK
+    compile 'cn.bmob.android:bmob-push:1.0.1'
 }

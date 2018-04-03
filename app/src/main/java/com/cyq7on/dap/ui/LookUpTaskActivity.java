@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.cyq7on.dap.R;
 import com.cyq7on.dap.base.ParentWithNaviActivity;
@@ -47,7 +48,7 @@ public class LookUpTaskActivity extends ParentWithNaviActivity {
     @Bind(R.id.rlScore)
     RelativeLayout rlScore;
     @Bind(R.id.tvTarget)
-    EditText tvTarget;
+    TextView tvTarget;
     @Bind(R.id.rlTarget)
     RelativeLayout rlTarget;
     private StudentTaskInfo studentTaskInfo;
@@ -64,15 +65,13 @@ public class LookUpTaskActivity extends ParentWithNaviActivity {
         setContentView(R.layout.activity_publish);
         ButterKnife.bind(this);
         initNaviView();
-        rlTarget.setOnClickListener(new View.OnClickListener() {
+        /*rlTarget.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                FragmentTransaction ft = getFragmentManager().beginTransaction();
-//                ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
                 ReceiverFragment receiverFragment = new ReceiverFragment();
                 receiverFragment.show(getFragmentManager(), ReceiverFragment.class.getSimpleName());
             }
-        });
+        });*/
         Bundle bundle = getBundle();
         //新建任务
         if (bundle == null) {
@@ -239,7 +238,7 @@ public class LookUpTaskActivity extends ParentWithNaviActivity {
 
     @OnClick(R.id.rlTarget)
     public void onSelectClick(View view) {
-//        new ReceiverFragment();
+        new ReceiverFragment().show(getFragmentManager(), ReceiverFragment.class.getSimpleName());;
     }
 
 }

@@ -97,7 +97,6 @@ public class ReceiverFragment extends DialogFragment {
                 Logger.d(i + s);
             }
         });
-        Logger.d("view");
         return view;
     }
 

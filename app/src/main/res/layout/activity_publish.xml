@@ -76,8 +76,7 @@
             android:layout_centerVertical="true"
             android:text="@string/task_target" />
 
-        <EditText
-            android:enabled="false"
+        <TextView
             android:id="@+id/tvTarget"
             android:background="@null"
             android:layout_height="wrap_content"
