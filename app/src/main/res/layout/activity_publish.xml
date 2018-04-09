@@ -64,6 +64,32 @@
             android:drawablePadding="10dp" />
     </RelativeLayout>
     <RelativeLayout
+        android:id="@+id/rl_upload"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/about_mid_bg"
+        android:padding="10dp" >
+
+        <TextView
+            style="@style/style_text_black"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:text="@string/task_upload" />
+        <TextView
+            android:id="@+id/tvFile"
+            android:background="@null"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            style="@style/style_text_black"
+            android:gravity="end"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="20dp"
+            android:paddingRight="10dp"
+            android:drawablePadding="10dp" />
+    </RelativeLayout>
+    <RelativeLayout
         android:id="@+id/rlTarget"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

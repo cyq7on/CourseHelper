@@ -17,11 +17,16 @@ import com.cyq7on.coursehelper.bean.User;
 import com.cyq7on.coursehelper.event.UserEvent;
 import com.cyq7on.coursehelper.model.UserModel;
 import com.cyq7on.coursehelper.ui.fragment.ReceiverFragment;
+import com.github.angads25.filepicker.controller.DialogSelectionListener;
+import com.github.angads25.filepicker.model.DialogConfigs;
+import com.github.angads25.filepicker.model.DialogProperties;
+import com.github.angads25.filepicker.view.FilePickerDialog;
 import com.google.gson.Gson;
 import com.orhanobut.logger.Logger;
 
 import org.greenrobot.eventbus.Subscribe;
 
+import java.io.File;
 import java.util.List;
 
 import butterknife.Bind;
@@ -33,11 +38,13 @@ import cn.bmob.newim.bean.BmobIMMessage;
 import cn.bmob.newim.bean.BmobIMUserInfo;
 import cn.bmob.newim.core.BmobIMClient;
 import cn.bmob.newim.listener.MessageSendListener;
+import cn.bmob.v3.datatype.BmobFile;
 import cn.bmob.v3.datatype.BmobRelation;
 import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.FindListener;
 import cn.bmob.v3.listener.SaveListener;
 import cn.bmob.v3.listener.UpdateListener;
+import cn.bmob.v3.listener.UploadFileListener;
 
 /**
  * Created by cyq7on on 18-4-2.
@@ -60,8 +67,15 @@ public class LookUpTaskActivity extends ParentWithNaviActivity {
     TextView tvTarget;
     @Bind(R.id.rlTarget)
     RelativeLayout rlTarget;
+    @Bind(R.id.rl_upload)
+    RelativeLayout rlUpload;
+    @Bind(R.id.tvFile)
+    TextView tvFile;
     private StudentTaskInfo studentTaskInfo;
     private TeacherTaskInfo teacherTaskInfo;
+    private static final int FILE_SELECT_CODE = 0;
+    private String url;
+
 
     @Override
     protected String title() {
@@ -74,13 +88,7 @@ public class LookUpTaskActivity extends ParentWithNaviActivity {
         setContentView(R.layout.activity_publish);
         ButterKnife.bind(this);
         initNaviView();
-        /*rlTarget.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                ReceiverFragment receiverFragment = new ReceiverFragment();
-                receiverFragment.show(getFragmentManager(), ReceiverFragment.class.getSimpleName());
-            }
-        });*/
+
         Bundle bundle = getBundle();
         //新建任务
         if (bundle == null) {
@@ -154,6 +162,7 @@ public class LookUpTaskActivity extends ParentWithNaviActivity {
             studentTaskInfo.content = tvContent.getText().toString();
             studentTaskInfo.score = tvScore.getText().toString();
             studentTaskInfo.stu = user;
+            studentTaskInfo.url = url;
             studentTaskInfo.save(getApplicationContext(), new SaveListener() {
                 @Override
                 public void onSuccess() {
@@ -175,6 +184,7 @@ public class LookUpTaskActivity extends ParentWithNaviActivity {
             teacherTaskInfo.title = tvTitle.getText().toString();
             teacherTaskInfo.content = tvContent.getText().toString();
             teacherTaskInfo.teacher = user;
+            teacherTaskInfo.url = url;
             UserModel.getInstance().queryUsers("role", 0, 100, new FindListener<User>() {
                 @Override
                 public void onSuccess(final List<User> list) {
@@ -277,7 +287,95 @@ public class LookUpTaskActivity extends ParentWithNaviActivity {
     @OnClick(R.id.rlTarget)
     public void onSelectClick(View view) {
         new ReceiverFragment().show(getFragmentManager(), ReceiverFragment.class.getSimpleName());
-        ;
     }
+
+    @OnClick(R.id.rl_upload)
+    public void onUploadClick(View view) {
+        showFileChooser();
+    }
+
+    private void showFileChooser() {
+        DialogProperties properties = new DialogProperties();
+        properties.selection_mode = DialogConfigs.SINGLE_MODE;
+        properties.selection_type = DialogConfigs.FILE_SELECT;
+        properties.root = new File(DialogConfigs.DEFAULT_DIR);
+        properties.error_dir = new File(DialogConfigs.DEFAULT_DIR);
+        properties.offset = new File(DialogConfigs.DEFAULT_DIR);
+        properties.extensions = null;
+        FilePickerDialog dialog = new FilePickerDialog(this, properties);
+        dialog.setTitle("选择文件上传");
+        dialog.setDialogSelectionListener(new DialogSelectionListener() {
+            @Override
+            public void onSelectedFilePaths(String[] files) {
+                //files is the array of the paths of files selected by the Application User.
+                Logger.d(files[0]);
+                File file = new File(files[0]);
+                tvFile.setText(file.getName());
+                final BmobFile bmobFile = new BmobFile(file);
+                bmobFile.uploadblock(getApplicationContext(), new UploadFileListener() {
+                    @Override
+                    public void onSuccess() {
+                        toast("上传文件成功");
+                        url = bmobFile.getFileUrl(getApplicationContext());
+                        Logger.d(url);
+                    }
+
+                    @Override
+                    public void onFailure(int i, String s) {
+                        toast("上传文件失败");
+                        Logger.d(i + s);
+                    }
+                });
+            }
+        });
+        dialog.show();
+
+//        Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+//        intent.setType("**/*//*");
+//        intent.addCategory(Intent.CATEGORY_OPENABLE);
+       /* try {
+            startActivityForResult( Intent.createChooser(intent, "选择文件上传"), FILE_SELECT_CODE);
+        } catch (android.content.ActivityNotFoundException ex) {
+            // Potentially direct the user to the Market with a Dialog
+            Toast.makeText(this, "Please install a File Manager.", Toast.LENGTH_SHORT).show();
+        }*/
+    }
+
+    /*@Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        switch (requestCode) {
+            case FILE_SELECT_CODE:
+                if (resultCode == RESULT_OK) {
+                    // Get the Uri of the selected file
+                    Uri uri = data.getData();
+                    Logger.d("File Uri: " + uri.toString());
+                    // Get the path
+                    String path;
+                    try {
+                        path = FileUtils.getPath(this, uri);
+                        Logger.d("File Path: " + path);
+                        File file = new File(path);
+                        BmobFile bmobFile = new BmobFile(file);
+                        bmobFile.uploadblock(getApplicationContext(), new UploadFileListener() {
+                            @Override
+                            public void onSuccess() {
+                                toast("上传文件成功");
+                            }
+
+                            @Override
+                            public void onFailure(int i, String s) {
+                                toast("上传文件失败");
+                                Logger.d(i + s);
+                            }
+                        });
+                    } catch (URISyntaxException e) {
+                        e.printStackTrace();
+                    }
+                }
+                break;
+        }
+
+    }*/
 
 }

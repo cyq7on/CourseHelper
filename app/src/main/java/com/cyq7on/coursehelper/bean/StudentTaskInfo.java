@@ -12,4 +12,6 @@ public class StudentTaskInfo extends BmobObject {
     public User stu;
     public User teacher;
     public String score;
+    //附件地址
+    public String url;
 }

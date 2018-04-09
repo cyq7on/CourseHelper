@@ -31,6 +31,7 @@
 
     <string name="task_topic">主题</string>
     <string name="task_content">内容</string>
+    <string name="task_upload">上传附件</string>
     <string name="task_score">分数</string>
     <string name="task_publish">提交任务</string>
     <string name="task_update">更改任务</string>
