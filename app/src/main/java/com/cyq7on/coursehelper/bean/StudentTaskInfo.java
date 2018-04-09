@@ -1,6 +1,7 @@
 package com.cyq7on.coursehelper.bean;
 
 import cn.bmob.v3.BmobObject;
+import cn.bmob.v3.datatype.BmobFile;
 
 /**
  * Created by cyq7on on 18-3-31.
@@ -14,4 +15,5 @@ public class StudentTaskInfo extends BmobObject {
     public String score;
     //附件地址
     public String url;
+    public BmobFile bmobFile;
 }

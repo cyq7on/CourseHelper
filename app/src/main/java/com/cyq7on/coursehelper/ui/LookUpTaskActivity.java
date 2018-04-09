@@ -75,6 +75,7 @@ public class LookUpTaskActivity extends ParentWithNaviActivity {
     private TeacherTaskInfo teacherTaskInfo;
     private static final int FILE_SELECT_CODE = 0;
     private String url;
+    private BmobFile bmobFile;
 
 
     @Override
@@ -112,6 +113,9 @@ public class LookUpTaskActivity extends ParentWithNaviActivity {
                     tvContent.setText(teacherTaskInfo.content);
                     btnEdit.setVisibility(View.GONE);
                     rlTarget.setVisibility(View.GONE);
+                    if(teacherTaskInfo.bmobFile != null){
+                        tvFile.setText(teacherTaskInfo.bmobFile.getFilename());
+                    }
                 } else {
                     studentTaskInfo = (StudentTaskInfo) bundle.getSerializable("info");
                     tvScore.setEnabled(false);
@@ -119,6 +123,9 @@ public class LookUpTaskActivity extends ParentWithNaviActivity {
                     tvScore.setText(studentTaskInfo.score);
                     tvContent.setText(studentTaskInfo.content);
                     tvTarget.setText(studentTaskInfo.teacher.getUsername());
+                    if(studentTaskInfo.bmobFile != null){
+                        tvFile.setText(studentTaskInfo.bmobFile.getFilename());
+                    }
                 }
 
             } else {
@@ -129,11 +136,17 @@ public class LookUpTaskActivity extends ParentWithNaviActivity {
                     tvTitle.setText(studentTaskInfo.title);
                     tvScore.setText(studentTaskInfo.score);
                     tvContent.setText(studentTaskInfo.content);
+                    if(studentTaskInfo.bmobFile != null){
+                        tvFile.setText(studentTaskInfo.bmobFile.getFilename());
+                    }
                 } else {//教师查看自己发布的任务
                     teacherTaskInfo = (TeacherTaskInfo) bundle.getSerializable("info");
                     tvTitle.setText(teacherTaskInfo.title);
                     rlScore.setVisibility(View.GONE);
                     tvContent.setText(teacherTaskInfo.content);
+                    if(teacherTaskInfo.bmobFile != null){
+                        tvFile.setText(teacherTaskInfo.bmobFile.getFilename());
+                    }
                 }
 
             }
@@ -163,6 +176,7 @@ public class LookUpTaskActivity extends ParentWithNaviActivity {
             studentTaskInfo.score = tvScore.getText().toString();
             studentTaskInfo.stu = user;
             studentTaskInfo.url = url;
+            studentTaskInfo.bmobFile = bmobFile;
             studentTaskInfo.save(getApplicationContext(), new SaveListener() {
                 @Override
                 public void onSuccess() {
@@ -185,6 +199,7 @@ public class LookUpTaskActivity extends ParentWithNaviActivity {
             teacherTaskInfo.content = tvContent.getText().toString();
             teacherTaskInfo.teacher = user;
             teacherTaskInfo.url = url;
+            teacherTaskInfo.bmobFile = bmobFile;
             UserModel.getInstance().queryUsers("role", 0, 100, new FindListener<User>() {
                 @Override
                 public void onSuccess(final List<User> list) {
@@ -317,6 +332,7 @@ public class LookUpTaskActivity extends ParentWithNaviActivity {
                     public void onSuccess() {
                         toast("上传文件成功");
                         url = bmobFile.getFileUrl(getApplicationContext());
+                        LookUpTaskActivity.this.bmobFile = bmobFile;
                         Logger.d(url);
                     }
 

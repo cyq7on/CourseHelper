@@ -1,6 +1,7 @@
 package com.cyq7on.coursehelper.bean;
 
 import cn.bmob.v3.BmobObject;
+import cn.bmob.v3.datatype.BmobFile;
 import cn.bmob.v3.datatype.BmobRelation;
 
 /**
@@ -14,4 +15,5 @@ public class TeacherTaskInfo extends BmobObject {
     public User teacher;
     //附件地址
     public String url;
+    public BmobFile bmobFile;
 }
