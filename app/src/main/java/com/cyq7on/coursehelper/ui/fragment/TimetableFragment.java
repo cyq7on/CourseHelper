@@ -1,5 +1,6 @@
 package com.cyq7on.coursehelper.ui.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -12,6 +13,7 @@ import com.cyq7on.coursehelper.R;
 import com.cyq7on.coursehelper.base.ParentWithNaviActivity;
 import com.cyq7on.coursehelper.base.ParentWithNaviFragment;
 import com.cyq7on.coursehelper.bean.MySubject;
+import com.cyq7on.coursehelper.ui.SetAlarmActivity;
 import com.cyq7on.coursehelper.util.MySubjectModel;
 import com.zhuangfei.timetable.core.OnSubjectBindViewListener;
 import com.zhuangfei.timetable.core.OnSubjectItemClickListener;
@@ -61,6 +63,7 @@ public class TimetableFragment extends ParentWithNaviFragment implements OnSubje
 
             @Override
             public void clickRight() {
+                startActivity(new Intent(getContext(), SetAlarmActivity.class));
             }
         };
     }

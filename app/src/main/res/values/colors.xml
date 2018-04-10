@@ -32,4 +32,9 @@
     <color name="color_1e1e1e">#1e1e1e</color>
     <color name="color_b4">#b4b4b4</color>
 
+    <color name="black_33">#333333</color>
+    <color name="half_transparent_black">#BB000000</color>
+    <color name="light_black">#141414</color>
+    <color name="line_and_outline_grey">#d9d9d9</color>
+
 </resources>
