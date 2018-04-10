@@ -1,5 +1,7 @@
 package com.cyq7on.coursehelper.ui;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
@@ -112,8 +114,9 @@ public class LookUpTaskActivity extends ParentWithNaviActivity {
                     tvContent.setText(teacherTaskInfo.content);
                     btnEdit.setVisibility(View.GONE);
                     rlTarget.setVisibility(View.GONE);
-                    if(teacherTaskInfo.bmobFile != null){
+                    if (teacherTaskInfo.bmobFile != null) {
                         tvFile.setText(teacherTaskInfo.bmobFile.getFilename());
+                        bmobFile = teacherTaskInfo.bmobFile;
                     }
                 } else {
                     studentTaskInfo = (StudentTaskInfo) bundle.getSerializable("info");
@@ -122,8 +125,9 @@ public class LookUpTaskActivity extends ParentWithNaviActivity {
                     tvScore.setText(studentTaskInfo.score);
                     tvContent.setText(studentTaskInfo.content);
                     tvTarget.setText(studentTaskInfo.teacher.getUsername());
-                    if(studentTaskInfo.bmobFile != null){
+                    if (studentTaskInfo.bmobFile != null) {
                         tvFile.setText(studentTaskInfo.bmobFile.getFilename());
+                        bmobFile = studentTaskInfo.bmobFile;
                     }
                 }
 
@@ -135,16 +139,18 @@ public class LookUpTaskActivity extends ParentWithNaviActivity {
                     tvTitle.setText(studentTaskInfo.title);
                     tvScore.setText(studentTaskInfo.score);
                     tvContent.setText(studentTaskInfo.content);
-                    if(studentTaskInfo.bmobFile != null){
+                    if (studentTaskInfo.bmobFile != null) {
                         tvFile.setText(studentTaskInfo.bmobFile.getFilename());
+                        bmobFile = studentTaskInfo.bmobFile;
                     }
                 } else {//教师查看自己发布的任务
                     teacherTaskInfo = (TeacherTaskInfo) bundle.getSerializable("info");
                     tvTitle.setText(teacherTaskInfo.title);
                     rlScore.setVisibility(View.GONE);
                     tvContent.setText(teacherTaskInfo.content);
-                    if(teacherTaskInfo.bmobFile != null){
+                    if (teacherTaskInfo.bmobFile != null) {
                         tvFile.setText(teacherTaskInfo.bmobFile.getFilename());
+                        bmobFile = teacherTaskInfo.bmobFile;
                     }
                 }
 
@@ -307,40 +313,50 @@ public class LookUpTaskActivity extends ParentWithNaviActivity {
     }
 
     private void showFileChooser() {
-        DialogProperties properties = new DialogProperties();
-        properties.selection_mode = DialogConfigs.SINGLE_MODE;
-        properties.selection_type = DialogConfigs.FILE_SELECT;
-        properties.root = new File(DialogConfigs.DEFAULT_DIR);
-        properties.error_dir = new File(DialogConfigs.DEFAULT_DIR);
-        properties.offset = new File(DialogConfigs.DEFAULT_DIR);
-        properties.extensions = null;
-        FilePickerDialog dialog = new FilePickerDialog(this, properties);
-        dialog.setTitle("选择文件上传");
-        dialog.setDialogSelectionListener(new DialogSelectionListener() {
-            @Override
-            public void onSelectedFilePaths(String[] files) {
-                //files is the array of the paths of files selected by the Application User.
-                Logger.d(files[0]);
-                File file = new File(files[0]);
-                tvFile.setText(file.getName());
-                final BmobFile bmobFile = new BmobFile(file);
-                bmobFile.uploadblock(getApplicationContext(), new UploadFileListener() {
-                    @Override
-                    public void onSuccess() {
-                        toast("上传文件成功");
-                        LookUpTaskActivity.this.bmobFile = bmobFile;
-                        Logger.d(bmobFile.getFileUrl(getApplicationContext()));
-                    }
+        if (bmobFile == null) {
+            DialogProperties properties = new DialogProperties();
+            properties.selection_mode = DialogConfigs.SINGLE_MODE;
+            properties.selection_type = DialogConfigs.FILE_SELECT;
+            properties.root = new File(DialogConfigs.DEFAULT_DIR);
+            properties.error_dir = new File(DialogConfigs.DEFAULT_DIR);
+            properties.offset = new File(DialogConfigs.DEFAULT_DIR);
+            properties.extensions = null;
+            FilePickerDialog dialog = new FilePickerDialog(this, properties);
+            dialog.setTitle("选择文件上传");
+            dialog.setDialogSelectionListener(new DialogSelectionListener() {
+                @Override
+                public void onSelectedFilePaths(String[] files) {
+                    //files is the array of the paths of files selected by the Application User.
+                    Logger.d(files[0]);
+                    File file = new File(files[0]);
+                    tvFile.setText(file.getName());
+                    final BmobFile bmobFile = new BmobFile(file);
+                    bmobFile.uploadblock(getApplicationContext(), new UploadFileListener() {
+                        @Override
+                        public void onSuccess() {
+                            toast("上传文件成功");
+                            LookUpTaskActivity.this.bmobFile = bmobFile;
+                            Logger.d(bmobFile.getFileUrl(getApplicationContext()));
+                        }
 
-                    @Override
-                    public void onFailure(int i, String s) {
-                        toast("上传文件失败");
-                        Logger.d(i + s);
-                    }
-                });
+                        @Override
+                        public void onFailure(int i, String s) {
+                            toast("上传文件失败");
+                            Logger.d(i + s);
+                        }
+                    });
+                }
+            });
+            dialog.show();
+        } else {
+            String url = bmobFile.getFileUrl(getApplicationContext());
+            if (!url.contains("http")) {
+                url = "http://" + url;
             }
-        });
-        dialog.show();
+            Uri uri = Uri.parse(url);
+            Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+            startActivity(intent);
+        }
 
 //        Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
 //        intent.setType("**/*//*");
