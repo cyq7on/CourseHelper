@@ -74,7 +74,6 @@ public class LookUpTaskActivity extends ParentWithNaviActivity {
     private StudentTaskInfo studentTaskInfo;
     private TeacherTaskInfo teacherTaskInfo;
     private static final int FILE_SELECT_CODE = 0;
-    private String url;
     private BmobFile bmobFile;
 
 
@@ -175,7 +174,6 @@ public class LookUpTaskActivity extends ParentWithNaviActivity {
             studentTaskInfo.content = tvContent.getText().toString();
             studentTaskInfo.score = tvScore.getText().toString();
             studentTaskInfo.stu = user;
-            studentTaskInfo.url = url;
             studentTaskInfo.bmobFile = bmobFile;
             studentTaskInfo.save(getApplicationContext(), new SaveListener() {
                 @Override
@@ -198,7 +196,6 @@ public class LookUpTaskActivity extends ParentWithNaviActivity {
             teacherTaskInfo.title = tvTitle.getText().toString();
             teacherTaskInfo.content = tvContent.getText().toString();
             teacherTaskInfo.teacher = user;
-            teacherTaskInfo.url = url;
             teacherTaskInfo.bmobFile = bmobFile;
             UserModel.getInstance().queryUsers("role", 0, 100, new FindListener<User>() {
                 @Override
@@ -331,9 +328,8 @@ public class LookUpTaskActivity extends ParentWithNaviActivity {
                     @Override
                     public void onSuccess() {
                         toast("上传文件成功");
-                        url = bmobFile.getFileUrl(getApplicationContext());
                         LookUpTaskActivity.this.bmobFile = bmobFile;
-                        Logger.d(url);
+                        Logger.d(bmobFile.getFileUrl(getApplicationContext()));
                     }
 
                     @Override

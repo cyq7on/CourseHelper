@@ -13,7 +13,6 @@ public class TeacherTaskInfo extends BmobObject {
     public String content;
     public BmobRelation stu;
     public User teacher;
-    //附件地址
-    public String url;
+    //附件
     public BmobFile bmobFile;
 }
