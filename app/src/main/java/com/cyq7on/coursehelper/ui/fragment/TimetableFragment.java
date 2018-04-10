@@ -9,6 +9,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.cyq7on.coursehelper.R;
+import com.cyq7on.coursehelper.base.ParentWithNaviActivity;
 import com.cyq7on.coursehelper.base.ParentWithNaviFragment;
 import com.cyq7on.coursehelper.bean.MySubject;
 import com.cyq7on.coursehelper.util.MySubjectModel;
@@ -44,6 +45,24 @@ public class TimetableFragment extends ParentWithNaviFragment implements OnSubje
     @Override
     protected String title() {
         return "课程表";
+    }
+    @Override
+    public Object right() {
+        return R.drawable.base_action_bar_add_bg_selector;
+    }
+
+    @Override
+    public ParentWithNaviActivity.ToolBarListener setToolBarListener() {
+        return new ParentWithNaviActivity.ToolBarListener() {
+            @Override
+            public void clickLeft() {
+
+            }
+
+            @Override
+            public void clickRight() {
+            }
+        };
     }
 
     @Nullable
