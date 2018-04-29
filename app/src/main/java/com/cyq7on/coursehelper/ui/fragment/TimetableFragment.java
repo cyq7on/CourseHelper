@@ -12,9 +12,12 @@ import android.widget.Toast;
 import com.cyq7on.coursehelper.R;
 import com.cyq7on.coursehelper.base.ParentWithNaviActivity;
 import com.cyq7on.coursehelper.base.ParentWithNaviFragment;
+import com.cyq7on.coursehelper.bean.CacheInfo;
 import com.cyq7on.coursehelper.bean.MySubject;
 import com.cyq7on.coursehelper.ui.SetAlarmActivity;
+import com.cyq7on.coursehelper.util.ACache;
 import com.cyq7on.coursehelper.util.MySubjectModel;
+import com.orhanobut.logger.Logger;
 import com.zhuangfei.timetable.core.OnSubjectBindViewListener;
 import com.zhuangfei.timetable.core.OnSubjectItemClickListener;
 import com.zhuangfei.timetable.core.OnSubjectItemLongClickListener;
@@ -43,6 +46,7 @@ public class TimetableFragment extends ParentWithNaviFragment implements OnSubje
 //    SwipeRefreshLayout swRefresh;
     private int curWeek = 1;
     private List<SubjectBean> subjectBeans;
+    private ACache aCache;
 
     @Override
     protected String title() {
@@ -74,9 +78,16 @@ public class TimetableFragment extends ParentWithNaviFragment implements OnSubje
         rootView = inflater.inflate(R.layout.fragment_timetable, container, false);
         initNaviView();
         ButterKnife.bind(this, rootView);
-        subjectBeans = transform(MySubjectModel.loadDefaultSubjects());
+        aCache = ACache.get(getContext());
+        CacheInfo cacheInfo = (CacheInfo) aCache.getAsObject("subjectBeans");
+        if(cacheInfo == null){
+            this.subjectBeans = transform(MySubjectModel.loadDefaultSubjects());
+        }else {
+            this.subjectBeans = cacheInfo.subjectBeans;
+        }
 
-        timetableView.setDataSource(subjectBeans)
+
+        timetableView.setDataSource(this.subjectBeans)
                 .setCurTerm("大三上学期")
                 .setCurWeek(curWeek)
 //                .bindTitleView(mTitleTextView)
@@ -204,7 +215,18 @@ public class TimetableFragment extends ParentWithNaviFragment implements OnSubje
 
     @Override
     public void onItemLongClick(View view, int day, int start) {
+        Logger.d(day + "\n" + start);
+    }
 
+    @Override
+    public void onItemLongClick(View view, SubjectBean subjectBean) {
+        if(subjectBean != null){
+            Logger.d(subjectBean.toString());
+            subjectBeans.remove(subjectBean);
+            timetableView.notifyDataSourceChanged();
+            CacheInfo cacheInfo = new CacheInfo(subjectBeans);
+            aCache.put("subjectBeans",cacheInfo);
+        }
     }
 
     /**

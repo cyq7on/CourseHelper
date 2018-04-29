@@ -181,4 +181,20 @@ public class SubjectBean extends BmobObject {
         this.students = students;
     }
 
+    @Override
+    public String toString() {
+        return "SubjectBean{" +
+                "name='" + name + '\'' +
+                ", time='" + time + '\'' +
+                ", room='" + room + '\'' +
+                ", teacher='" + teacher + '\'' +
+                ", teachers=" + teachers +
+                ", students=" + students +
+                ", weekList=" + weekList +
+                ", start=" + start +
+                ", step=" + step +
+                ", day=" + day +
+                ", colorRandom=" + colorRandom +
+                '}';
+    }
 }

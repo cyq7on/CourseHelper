@@ -1,7 +1,5 @@
 package com.zhuangfei.timetable.core;
 
-import java.util.List;
-
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +10,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.zhuangfei.android_timetableview.sample.R;
+
+import java.util.List;
 
 /**
  * Subject UI的维护
@@ -116,6 +116,7 @@ public class SubjectUIModel {
 		
 		if (onSubjectItemLongClickListener != null)
 			onSubjectItemLongClickListener.onItemLongClick(view, bean.getDay(),bean.getStart());
+			onSubjectItemLongClickListener.onItemLongClick(view, bean);
 	}
 	
 	private TextView createSubjectView(View view, SubjectBean subject, SubjectBean pre, int i) {
