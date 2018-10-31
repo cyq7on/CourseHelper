@@ -16,6 +16,7 @@
         android:orientation="vertical" >
 
         <RadioGroup
+            android:visibility="gone"
             android:id="@+id/rg"
             android:padding="5dp"
             android:orientation="horizontal"
@@ -34,11 +35,13 @@
         </RadioGroup>
 
         <View
+            android:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="0.5dp"
             android:background="@mipmap/base_horization_line" />
 
         <RadioGroup
+            android:visibility="gone"
             android:id="@+id/rgSex"
             android:padding="5dp"
             android:orientation="horizontal"

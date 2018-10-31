@@ -8,11 +8,11 @@
     android:fitsSystemWindows="true"
     tools:context="cn.bmob.dap.com.bmob.dap.ui.SplashActivity">
 
-    <ImageView
-        android:layout_centerInParent="true"
-        android:layout_height="wrap_content"
-        android:layout_width="wrap_content"
-        android:src="@mipmap/login_logo"
-        />
+    <!--<ImageView-->
+        <!--android:layout_centerInParent="true"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:src="@mipmap/login_logo"-->
+        <!--/>-->
 
 </RelativeLayout>
