@@ -133,7 +133,6 @@
             </intent-filter>
         </receiver>
 
-        <activity android:name=".ui.SetAlarmActivity"></activity>
     </application>
 
 </manifest>

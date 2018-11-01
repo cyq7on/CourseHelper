@@ -7,13 +7,21 @@
     android:orientation="vertical" >
 
     <include layout="@layout/include_navi"/>
-
-    <TextView
-        android:layout_margin="15dp"
-        android:id="@+id/tv_news"
-        android:textSize="26sp"
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="match_parent">
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_margin="15dp"
+                android:id="@+id/tv_news"
+                android:textSize="26sp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        </FrameLayout>
+    </ScrollView>
 
 
 </LinearLayout>

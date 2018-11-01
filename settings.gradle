@@ -1,1 +1,2 @@
-include ':app',':TimetableView',':alarmmanagerclock'
+//include ':app',':TimetableView',':alarmmanagerclock'
+include ':app'

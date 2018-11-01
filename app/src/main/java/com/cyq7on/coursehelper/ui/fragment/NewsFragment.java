@@ -104,7 +104,7 @@ public class NewsFragment extends ParentWithNaviFragment {
     }
 
     private void query() {
-        String json = FileUtils.getJson(getContext(), "news.json");
+        String json = FileUtils.getJson(getActivity(), "news.json");
         NewsInfo newsInfo = new Gson().fromJson(json, NewsInfo.class);
         adapter.bindDatas(newsInfo.news);
     }

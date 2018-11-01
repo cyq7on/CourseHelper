@@ -48,7 +48,6 @@ android {
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile 'com.android.support.constraint:constraint-layout:1.0.2'
     testCompile 'junit:junit:4.12'
     compile('com.android.support:appcompat-v7:22.2.0') {
         exclude module: 'support-annotations'
@@ -57,8 +56,14 @@ dependencies {
     compile 'com.jakewharton:butterknife:7.0.1'
     compile 'com.orhanobut:logger:1.4'
     compile 'org.greenrobot:eventbus:3.0.0'
-    compile project(':TimetableView')
+//    compile project(':TimetableView')
     compile 'com.google.code.gson:gson:2.8.2'
     compile 'com.github.angads25:filepicker:1.1.1'
-    compile project(':alarmmanagerclock')
+//    compile project(':alarmmanagerclock')
+
+    compile 'cn.bmob.android:bmob-im:2.0.5@aar'
+    //bmob-sdk:3.4.7
+    compile 'cn.bmob.android:bmob-sdk:3.4.7-aar'
+    //Bmob的消息推送SDK
+//    compile 'cn.bmob.android:bmob-push:1.0.1'
 }
