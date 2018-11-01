@@ -13,9 +13,9 @@ import com.cyq7on.coursehelper.base.ParentWithNaviFragment;
 import com.cyq7on.coursehelper.bean.User;
 import com.cyq7on.coursehelper.db.NewFriendManager;
 import com.cyq7on.coursehelper.event.RefreshEvent;
-import com.cyq7on.coursehelper.ui.fragment.TaskFragment;
+import com.cyq7on.coursehelper.ui.fragment.NewsFragment;
 import com.cyq7on.coursehelper.ui.fragment.SetFragment;
-import com.cyq7on.coursehelper.ui.fragment.TimetableFragment;
+import com.cyq7on.coursehelper.ui.fragment.TaskFragment;
 import com.cyq7on.coursehelper.util.IMMLeaks;
 import com.orhanobut.logger.Logger;
 
@@ -56,7 +56,7 @@ public class MainActivity extends BaseActivity implements ObseverListener {
     ImageView iv_contact_tips;
 
     private Button[] mTabs;
-    private TimetableFragment timeTableFragment;
+    private ParentWithNaviFragment timeTableFragment;
     private SetFragment setFragment;
     private ParentWithNaviFragment contactFragment;
     private Fragment[] fragments;
@@ -115,7 +115,7 @@ public class MainActivity extends BaseActivity implements ObseverListener {
             contactFragment = new DepAndDoctorFragment();
         }*/
         contactFragment = new TaskFragment();
-        timeTableFragment = new TimetableFragment();
+        timeTableFragment = new NewsFragment();
         setFragment = new SetFragment();
         fragments = new Fragment[]{timeTableFragment, contactFragment, setFragment};
         if(index == 0){

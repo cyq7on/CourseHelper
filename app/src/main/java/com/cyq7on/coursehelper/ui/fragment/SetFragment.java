@@ -41,7 +41,7 @@ public class SetFragment extends ParentWithNaviFragment {
 
     @Override
     protected String title() {
-        return "设置";
+        return "用户";
     }
 
     public static SetFragment newInstance() {

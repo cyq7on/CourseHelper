@@ -84,7 +84,7 @@
         <!-- bmobim end -->
 
         <activity android:name=".ui.EditPwdActivity" />
-        <activity android:name=".ui.LookUpTaskActivity" />
+        <activity android:name=".ui.NewsDetailActivity" />
 
         <service
             android:name="cn.bmob.push.lib.service.PushService"

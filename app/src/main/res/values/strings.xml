@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">课程助手</string>
+    <string name="app_name">读报助手</string>
     <string name="action_settings">Settings</string>
     <string name="login_username_hint">请输入用户名&#8230;</string>
     <string name="login_password_hint">请输入密码&#8230;</string>
@@ -19,9 +19,9 @@
     <string name="login_pwd">密码 </string>
     <string name="login_email">确认密码 </string>
 
-    <string name="main_tab_timetable">课程表</string>
-    <string name="main_tab_task">任务</string>
-    <string name="mian_tab_set">设置</string>
+    <string name="main_tab_timetable">语音读报</string>
+    <string name="main_tab_task">预留</string>
+    <string name="mian_tab_set">用户</string>
 
     <string name="add_avator">头像</string>
     <string name="add_nick">昵称</string>

@@ -17,7 +17,7 @@ import com.cyq7on.coursehelper.adapter.base.IMutlipleItem;
 import com.cyq7on.coursehelper.base.ParentWithNaviFragment;
 import com.cyq7on.coursehelper.bean.StudentTaskInfo;
 import com.cyq7on.coursehelper.bean.User;
-import com.cyq7on.coursehelper.ui.LookUpTaskActivity;
+import com.cyq7on.coursehelper.ui.NewsDetailActivity;
 import com.orhanobut.logger.Logger;
 
 import java.util.List;
@@ -97,7 +97,7 @@ public class TeacherReceiveTaskFragment extends ParentWithNaviFragment {
                 StudentTaskInfo studentTaskInfo = adapter.getItem(position);
                 bundle.putSerializable("info", studentTaskInfo);
                 bundle.putBoolean("flag",true);
-                startActivity(LookUpTaskActivity.class, bundle);
+                startActivity(NewsDetailActivity.class, bundle);
             }
 
             @Override

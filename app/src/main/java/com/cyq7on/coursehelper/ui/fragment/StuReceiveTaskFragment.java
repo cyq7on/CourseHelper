@@ -17,7 +17,7 @@ import com.cyq7on.coursehelper.adapter.base.IMutlipleItem;
 import com.cyq7on.coursehelper.base.ParentWithNaviFragment;
 import com.cyq7on.coursehelper.bean.TeacherTaskInfo;
 import com.cyq7on.coursehelper.bean.User;
-import com.cyq7on.coursehelper.ui.LookUpTaskActivity;
+import com.cyq7on.coursehelper.ui.NewsDetailActivity;
 import com.orhanobut.logger.Logger;
 
 import org.greenrobot.eventbus.EventBus;
@@ -116,7 +116,7 @@ public class StuReceiveTaskFragment extends ParentWithNaviFragment {
                 TeacherTaskInfo teacherTaskInfo = adapter.getItem(position);
                 bundle.putSerializable("info", teacherTaskInfo);
                 bundle.putBoolean("flag",true);
-                startActivity(LookUpTaskActivity.class, bundle);
+                startActivity(NewsDetailActivity.class, bundle);
             }
 
             @Override
