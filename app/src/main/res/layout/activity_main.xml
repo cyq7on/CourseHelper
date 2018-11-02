@@ -17,14 +17,18 @@
             android:layout_weight="1" >
 
             <Button
+                android:background="@android:color/transparent"
                 android:id="@+id/btn_conversation"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@drawable/top_bar"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginEnd="0dp"
+                android:layout_marginRight="0dp"
                 android:drawableTop="@drawable/tab_message_btn"
                 android:onClick="onTabSelect"
-                android:paddingBottom="2dip"
                 android:paddingTop="7dip"
+                android:paddingBottom="2dip"
                 android:scaleType="matrix"
                 android:text="@string/main_tab_timetable"
                 android:textColor="@drawable/tab_textcolor"
@@ -52,10 +56,10 @@
             android:layout_weight="1" >
 
             <Button
+                android:background="@android:color/transparent"
                 android:id="@+id/btn_contact"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@drawable/top_bar"
                 android:drawableTop="@drawable/tab_set_btn"
                 android:onClick="onTabSelect"
                 android:paddingBottom="2dip"
@@ -82,11 +86,11 @@
         </RelativeLayout>
 
         <Button
+            android:background="@android:color/transparent"
             android:id="@+id/btn_set"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="@drawable/top_bar"
             android:drawableTop="@drawable/tab_contact_btn"
             android:onClick="onTabSelect"
             android:paddingBottom="2dip"

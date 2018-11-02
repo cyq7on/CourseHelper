@@ -33,7 +33,7 @@ public class NewsDetailActivity extends ParentWithNaviActivity {
 
     @Override
     public Object right() {
-        return R.drawable.laba2;
+        return R.drawable.laba;
     }
 
     @Override
