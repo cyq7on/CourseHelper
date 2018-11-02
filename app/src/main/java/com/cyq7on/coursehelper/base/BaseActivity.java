@@ -6,13 +6,13 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.support.v4.app.FragmentActivity;
+import android.util.Config;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
 
-import com.cyq7on.coursehelper.Config;
 import com.orhanobut.logger.Logger;
 
 import org.greenrobot.eventbus.EventBus;

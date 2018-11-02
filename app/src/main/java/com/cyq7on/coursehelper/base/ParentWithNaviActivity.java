@@ -11,9 +11,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.cyq7on.coursehelper.R;
-import com.cyq7on.coursehelper.bean.User;
-
-import cn.bmob.v3.BmobUser;
 
 /**封装了导航条的类均需继承该类
  * @author :smile
@@ -26,7 +23,6 @@ public abstract class ParentWithNaviActivity extends BaseActivity {
     public TextView tv_title;
     public ImageView tv_left;
     public TextView tv_right;
-    public User user;
 
     /**导航栏标题:必填项
      * @return
@@ -65,9 +61,6 @@ public abstract class ParentWithNaviActivity extends BaseActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if(user == null){
-            user = User.getCurrentUser(getApplicationContext(),User.class);
-        }
     }
 
     View.OnClickListener clickListener = new View.OnClickListener() {
@@ -166,7 +159,4 @@ public abstract class ParentWithNaviActivity extends BaseActivity {
         startActivity(intent);
     }
 
-    public String getCurrentUid(){
-        return BmobUser.getCurrentUser(this,User.class).getObjectId();
-    }
 }

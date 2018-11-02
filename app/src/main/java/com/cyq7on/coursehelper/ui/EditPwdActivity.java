@@ -6,16 +6,14 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.cyq7on.coursehelper.Constant;
 import com.cyq7on.coursehelper.R;
 import com.cyq7on.coursehelper.base.ParentWithNaviActivity;
 import com.cyq7on.coursehelper.util.SPUtil;
-import com.orhanobut.logger.Logger;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import cn.bmob.v3.BmobUser;
-import cn.bmob.v3.listener.UpdateListener;
 
 /**
  * @Description: 修改密码
@@ -57,20 +55,14 @@ public class EditPwdActivity extends ParentWithNaviActivity {
             toast("请输入新密码");
             return;
         }
-        BmobUser.updateCurrentUserPassword(getApplicationContext(), pwd, pwdNew, new UpdateListener() {
-            @Override
-            public void onSuccess() {
-                toast("修改密码成功");
-                SPUtil.putAndApply(getApplicationContext(),"pwd", pwdNew);
-                finish();
-            }
-
-            @Override
-            public void onFailure(int i, String s) {
-                toast("修改密码失败");
-                Logger.d(i + s);
-            }
-        });
+        String spPwd = (String) SPUtil.get(getApplicationContext(),Constant.PWD,"");
+        if(!pwd.equals(spPwd)){
+            toast("原密码不正确");
+            return;
+        }
+        toast("修改密码成功");
+        SPUtil.putAndApply(getApplicationContext(),Constant.PWD, pwdNew);
+        finish();
     }
 
 }

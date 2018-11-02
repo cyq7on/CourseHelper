@@ -7,12 +7,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.cyq7on.coursehelper.adapter.OnRecyclerViewListener;
+import com.cyq7on.coursehelper.base.BaseActivity;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-
-import com.cyq7on.coursehelper.adapter.OnRecyclerViewListener;
-import com.cyq7on.coursehelper.base.BaseActivity;
 
 
 /**

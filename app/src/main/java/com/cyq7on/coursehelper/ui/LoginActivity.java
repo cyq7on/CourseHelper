@@ -6,21 +6,13 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.cyq7on.coursehelper.Constant;
 import com.cyq7on.coursehelper.R;
 import com.cyq7on.coursehelper.base.BaseActivity;
-import com.cyq7on.coursehelper.bean.User;
-import com.cyq7on.coursehelper.event.FinishEvent;
-import com.cyq7on.coursehelper.model.UserModel;
 import com.cyq7on.coursehelper.util.SPUtil;
-
-import org.greenrobot.eventbus.Subscribe;
 
 import butterknife.Bind;
 import butterknife.OnClick;
-import cn.bmob.newim.BmobIM;
-import cn.bmob.newim.bean.BmobIMUserInfo;
-import cn.bmob.v3.exception.BmobException;
-import cn.bmob.v3.listener.LogInListener;
 
 /**登陆界面
  * @author :smile
@@ -46,21 +38,16 @@ public class LoginActivity extends BaseActivity {
 
     @OnClick(R.id.btn_login)
     public void onLoginClick(View view){
-        final String pwd = et_password.getText().toString();
-        UserModel.getInstance().login(et_username.getText().toString(), pwd, new LogInListener() {
-
-            @Override
-            public void done(Object o, BmobException e) {
-                if (e == null) {
-                    SPUtil.putAndApply(getApplicationContext(),"pwd", pwd);
-                    User user =(User)o;
-                    BmobIM.getInstance().updateUserInfo(new BmobIMUserInfo(user.getObjectId(), user.getUsername(), user.getAvatar()));
-                    startActivity(MainActivity.class, null, true);
-                } else {
-                    toast(e.getMessage() + "(" + e.getErrorCode() + ")");
-                }
-            }
-        });
+        String name = et_username.getText().toString();
+        String pwd = et_password.getText().toString();
+        String spName = (String) SPUtil.get(getApplicationContext(),Constant.NAME,"");
+        String spPwd = (String) SPUtil.get(getApplicationContext(),Constant.PWD,"");
+        if(name.equals(spName) && pwd.equals(spPwd)){
+            startActivity(MainActivity.class, null, true);
+            SPUtil.putAndApply(getApplicationContext(),Constant.FLAG,true);
+        }else {
+            toast("账号或密码错误");
+        }
     }
 
     @OnClick(R.id.tv_register)
@@ -68,8 +55,4 @@ public class LoginActivity extends BaseActivity {
         startActivity(RegisterActivity.class, null, false);
     }
 
-    @Subscribe
-    public void onEventMainThread(FinishEvent event){
-        finish();
-    }
 }

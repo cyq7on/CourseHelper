@@ -28,7 +28,6 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             style="@style/style_text_black"
-            android:layout_toRightOf="@id/iv_recent_avatar"
             android:gravity="left|center"
             android:textSize="26sp"
             />

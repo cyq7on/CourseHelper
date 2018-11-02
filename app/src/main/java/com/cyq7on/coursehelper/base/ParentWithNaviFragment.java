@@ -8,7 +8,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.cyq7on.coursehelper.R;
-import com.cyq7on.coursehelper.bean.User;
 
 
 /**封装了导航条的Fragment类均需继承该类
@@ -24,14 +23,10 @@ public abstract class ParentWithNaviFragment extends BaseFragment {
     public TextView tv_right;
     public ImageView tv_left;
     public LinearLayout ll_navi;
-    public User user;
 
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
-        if(user == null){
-            user = User.getCurrentUser(getActivity(), User.class);
-        }
     }
 
     /**
