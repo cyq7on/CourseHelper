@@ -22,7 +22,11 @@
 
         <TextView
             android:padding="@dimen/margin_10"
-            android:background="@drawable/pop_bg"
+            android:layout_marginTop="@dimen/margin_10"
+            android:layout_marginLeft="@dimen/margin_5"
+            android:layout_marginRight="@dimen/margin_5"
+            android:textColor="#fff"
+            android:background="@drawable/btn_login_n"
             android:id="@+id/tv_recent_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
