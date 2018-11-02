@@ -15,13 +15,12 @@ import com.cyq7on.coursehelper.ui.fragment.SetFragment;
 import com.cyq7on.coursehelper.ui.fragment.TaskFragment;
 
 import butterknife.Bind;
-import cn.bmob.newim.listener.ObseverListener;
 
 /**
  * @author :smile
  * @project:MainActivity
  */
-public class MainActivity extends BaseActivity implements ObseverListener {
+public class MainActivity extends BaseActivity{
 
     @Bind(R.id.btn_conversation)
     Button btn_conversation;
