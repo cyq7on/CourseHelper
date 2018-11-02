@@ -64,7 +64,15 @@ public class NewsDetailActivity extends ParentWithNaviActivity {
         Bundle bundle = getBundle();
 //        bundle.getSerializable("info");
         String news = bundle.getString("info");
-        tvNews.setText(news);
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < news.length(); i++) {
+            char c = news.charAt(i);
+            sb.append(c);
+            if(c == '。'){
+                sb.append("\n");
+            }
+        }
+        tvNews.setText(sb);
         textToSpeech = new TextToSpeech(getApplicationContext(), new TextToSpeech.OnInitListener() {
             @Override
             public void onInit(int status) {
